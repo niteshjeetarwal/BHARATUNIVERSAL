@@ -206,16 +206,14 @@ export default function AdminPortalPage() {
       excerpt: newExcerpt.trim() || newBody.trim().slice(0, 140) + '...',
       publishedAt: new Date().toISOString().slice(0, 10),
       likes: 0,
-      blocks: newBody
-        .split('
-
-')
-        .filter(Boolean)
-        .map((para, i) => ({
-          id: `blk-${Date.now()}-${i}`,
-          type: 'paragraph',
-          text: para.trim(),
-        })),
+    blocks: newBody
+  .split('\n\n')
+  .filter(Boolean)
+  .map((para, i) => ({
+    id: `blk-${Date.now()}-${i}`,
+    type: 'paragraph' as const,
+    text: para.trim(),
+  })),
     };
 
     const updated: SiteConfig = {
